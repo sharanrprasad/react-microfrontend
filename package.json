@@ -1,0 +1,15 @@
+{
+    "name": "vite-module-federation",
+    "private": true,
+    "version": "1.0.0",
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "build": "npm run build --workspaces",
+        "preview": "npm run preview --workspaces"
+    },
+    "devDependencies": {
+        "prettier": "^3.3.3"
+    }
+}

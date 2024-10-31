@@ -13,7 +13,9 @@ const Header = () => {
       const result = await fetchIsProfileComplete();
       setIsProfileComplete(result);
     };
-    getIsProfileComplete().then();
+    getIsProfileComplete().catch(err => {
+      console.error(err);
+    })
 
     const listener = (e: UserProfileUpdatedCustomEvent) => {
       setIsProfileComplete(e.detail.isComplete);
@@ -24,12 +26,6 @@ const Header = () => {
       listener as EventListener,
     );
 
-    // window.dispatchEvent(
-    //   new CustomEvent<UserProfileUpdatedEventData>(
-    //     MfeEvents.USER_UPDATED_EVENT,
-    //     { detail: { isComplete: true } },
-    //   ),
-    // );
     return () => {
       window.removeEventListener(
         MfeEvents.USER_UPDATED_EVENT,

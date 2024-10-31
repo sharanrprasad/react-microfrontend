@@ -1,7 +1,7 @@
 import React from "react";
 import {
   createBrowserRouter,
-  Navigate,
+  Navigate, RouteObject,
   RouterProvider,
 } from "react-router-dom";
 import PageLayout from "./containers/PageLayout.tsx";
@@ -30,9 +30,8 @@ const router = createBrowserRouter(
   {
     async patchRoutesOnNavigation({ path, patch }) {
       if (path.startsWith("/user")) {
-        let children = await import("user/user.routes");
-        console.log(children);
-        patch("root", children.default.routes);
+        const children: { default: { routes: RouteObject[]}} = await import("user/user.routes") as { default: { routes: RouteObject[]}};
+        patch("root", children?.default.routes);
       }
     },
   },
